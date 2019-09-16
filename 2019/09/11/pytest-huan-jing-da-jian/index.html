@@ -4,11 +4,19 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="HelloWorld, 极客，彼岸，技术，测试，分享，生活">
-    <meta name="description" content="
-        document.querySelectorAll(&#39;.github-emoji&#39;)
-          .forEach(el =&gt; {
-            if (!el.dataset.src) { return">
+    <meta name="keywords" content="pytest环境搭建, 极客，彼岸，技术，测试，分享，生活">
+    <meta name="description" content="一、前置要求
+
+python3.5+
+
+二、安装
+
+pip install -U pytest
+
+三、运行
+
+测试搜索(test discovery)：
+是python搜索测试文件和测试用例的过程，只要遵守pytest的命名规则，pytes">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +24,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>HelloWorld | 极客彼岸</title>
+    <title>pytest环境搭建 | 极客彼岸</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -263,13 +271,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        HelloWorld
+                        pytest环境搭建
                     </div>
                 </div>
             </div>
@@ -391,7 +399,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-13
+                    2019-09-11
                 </div>
 
                 
@@ -407,7 +415,45 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <script>
+                <p>一、前置要求</p>
+<ol>
+<li>python3.5+</li>
+</ol>
+<p>二、安装</p>
+<ol>
+<li>pip install -U pytest</li>
+</ol>
+<p>三、运行</p>
+<ol>
+<li>测试搜索(test discovery)：<ol>
+<li>是python搜索测试文件和测试用例的过程，只要遵守pytest的命名规则，pytest就可以自动搜索所有待执行的测试用例</li>
+<li>测试规则是可以自定义的</li>
+</ol>
+</li>
+<li>命名规则<ol>
+<li>测试文件应当命名为：test_<something>.py or <something>_test.py</something></something></li>
+<li>测试函数应当命名为：test_<something></something></li>
+<li>测试类应该命名为：Test<something></something></li>
+</ol>
+</li>
+<li>测试结果类型<ol>
+<li>PASSED(.)：测试通过</li>
+<li>FAILED(F)：测试失败</li>
+<li>SKIPPED(s)：测试未被执行<ol>
+<li>指定测试跳过执行，可以将测试标记为 @pytest.mark.skip()</li>
+<li>或者使用 @pytest.mark.skipif() 指定跳过测试的条件</li>
+</ol>
+</li>
+<li>xfail(x)：预期测试失败，实际测试失败<ol>
+<li>使用 @pytest.mark.xfail()指定你预期会失败的用例</li>
+</ol>
+</li>
+<li>XPASS(X)：预期测试失败，但实际运行通过，不符合预期</li>
+<li>ERROR(E)：测试用例之外的代码触发异常</li>
+</ol>
+</li>
+</ol>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -583,9 +629,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《HelloWorld》
+                    《pytest环境搭建》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/13/helloworld/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/11/pytest-huan-jing-da-jian/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Wayne Wang
             </a> 采用
@@ -630,27 +676,35 @@
                 <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2019/09/13/helloworld/">
+                <a href="/2019/09/11/pytest-huan-jing-da-jian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="HelloWorld">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="pytest环境搭建">
                         
-                        <span class="card-title">HelloWorld</span>
+                        <span class="card-title">pytest环境搭建</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return
+                            一、前置要求
+
+python3.5+
+
+二、安装
+
+pip install -U pytest
+
+三、运行
+
+测试搜索(test discovery)：
+是python搜索测试文件和测试用例的过程，只要遵守pytest的命名规则，pytes
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-13
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-11
                             </span>
                         <span class="publish-author">
                             
@@ -671,27 +725,35 @@
                 本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/13/helloworld/">
+                <a href="/2019/09/11/pytest-huan-jing-da-jian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="HelloWorld">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="pytest环境搭建">
                         
-                        <span class="card-title">HelloWorld</span>
+                        <span class="card-title">pytest环境搭建</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return
+                            一、前置要求
+
+python3.5+
+
+二、安装
+
+pip install -U pytest
+
+三、运行
+
+测试搜索(test discovery)：
+是python搜索测试文件和测试用例的过程，只要遵守pytest的命名规则，pytes
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-13
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-11
                             </span>
                         <span class="publish-author">
                             

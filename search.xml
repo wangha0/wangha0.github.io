@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>HelloWorld</title>
-      <link href="/2019/09/13/helloworld/"/>
-      <url>/2019/09/13/helloworld/</url>
+      <title>pytest环境搭建</title>
+      <link href="/2019/09/11/pytest-huan-jing-da-jian/"/>
+      <url>/2019/09/11/pytest-huan-jing-da-jian/</url>
       
-        <content type="html"><![CDATA[<script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+        <content type="html"><![CDATA[<p>一、前置要求</p><ol><li>python3.5+</li></ol><p>二、安装</p><ol><li>pip install -U pytest</li></ol><p>三、运行</p><ol><li>测试搜索(test discovery)：<ol><li>是python搜索测试文件和测试用例的过程，只要遵守pytest的命名规则，pytest就可以自动搜索所有待执行的测试用例</li><li>测试规则是可以自定义的</li></ol></li><li>命名规则<ol><li>测试文件应当命名为：test_<something>.py or <something>_test.py</something></something></li><li>测试函数应当命名为：test_<something></something></li><li>测试类应该命名为：Test<something></something></li></ol></li><li>测试结果类型<ol><li>PASSED(.)：测试通过</li><li>FAILED(F)：测试失败</li><li>SKIPPED(s)：测试未被执行<ol><li>指定测试跳过执行，可以将测试标记为 @pytest.mark.skip()</li><li>或者使用 @pytest.mark.skipif() 指定跳过测试的条件</li></ol></li><li>xfail(x)：预期测试失败，实际测试失败<ol><li>使用 @pytest.mark.xfail()指定你预期会失败的用例</li></ol></li><li>XPASS(X)：预期测试失败，但实际运行通过，不符合预期</li><li>ERROR(E)：测试用例之外的代码触发异常</li></ol></li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
       
       
