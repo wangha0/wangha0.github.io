@@ -4,11 +4,76 @@
   
     
     <entry>
-      <title>pytest环境搭建</title>
-      <link href="/2019/09/11/pytest-huan-jing-da-jian/"/>
-      <url>/2019/09/11/pytest-huan-jing-da-jian/</url>
+      <title>004-fixture</title>
+      <link href="/2019/09/11/004-fixture/"/>
+      <url>/2019/09/11/004-fixture/</url>
+      
+        <content type="html"><![CDATA[<p>一、fixture：在测试函数运行前后，由pytest执行的外壳函数</p><ol><li>代码可以定制</li><li>满足多变的测试需求<ol><li>传递数据</li><li>setup 和 teardown</li></ol></li></ol><p>二、使用</p><ol><li>使用装饰器 @pytest.fixture() 声明函数是一个fixture</li><li>通过 conftest.py 共享fixture<ol><li>不能被测试文件导入</li><li>放在哪个目录，就对当前目录和子目录起作用</li></ol></li><li>使用 fixture 执行配置及销毁逻辑<ol><li>fixture 加入 yield , 系统会在 yield 处停止继续运行测试函数，执行完毕后再执行 yield 之后的代码</li><li>无论测试过程中发生了什么，yield 之后的代码都会被执行</li></ol></li><li>使用 –setup-show 回溯 fixture 的执行过程<ol><li>fixture 名称前面的是 fixture 的作用范围</li></ol></li><li>使用 fixture 传递测试数据<ol><li>如果 fixture 发生了异常，测试结果会是 E , 表明不是在核心函数中出现的异常</li></ol></li><li>使用多个 fixture<ol><li>fixture 也可以使用其他的 fixture</li></ol></li><li>指定 fixture 作用范围<ol><li>fixture 包含 scope 的可选参数，用于控制配置和销毁逻辑的频率<ol><li>scope=“function”：函数级别的 fixture 每个测试函数只需要执行一次，是默认值</li><li>scope=“class”：类级别的 fixture 每个测试类只需要运行一次，无论测试类里有多少类方法都可以共享</li><li>scope=“module”：模块级别的 fixture 每个模块只需要运行一次，无论模块里有多少个测试函数、类方法或其他 fixture 都可以共享这个 fixture</li><li>scope=“session”：会话级别的 fixture 每次会话只需要运行一次，一次会话中的所有测试函数、方法都可以共享这个 fixture</li></ol></li><li>作用范围是 fixture 定义的时候定义的，不是在调用的时候定义的，因此使用 fixture 是不能修改 fixture 的作用范围的</li><li>fixture 只能使用相同作用范围级别或更高级别的 fixture</li></ol></li><li>使用 userfixtures 指定 fixture：<ol><li>使用装饰器 @pytest.mark.userfixtures 标记测试函数或测试类<ol><li>使用此种方式和在测试方法中添加 fixture 参数的区别是后者才能使用 fixture 的返回值</li></ol></li></ol></li><li>为常用 fixture 添加 autouse 选项<ol><li>可以通过指定 autouse=“True” 使作用域内的测试函数都运行该 fixture</li><li>不建议使用此方式</li></ol></li><li>为 fixture 重命名<ol><li>通过 name=“xxx” 重命名 fixture</li></ol></li><li>fixture 参数化<ol><li>使用 param 参数对 fixture进行参数化</li><li>不进行参数化时测试函数只运行一次，参数化后可运行多次，这一特性非常强大</li></ol></li></ol><p>三、内置 fixture</p><ol><li>tmpdir 和 tmpdir_factory<ol><li>负责在测试开始前创建临时文件目录，并且在测试结束后删除</li><li>tmpdir 作用范围是函数级别，只能单独对函数使用</li><li>tmpdir_factory 作用范围是会话级别，如果要对类、模块、会话级别使用，请用这个</li><li>返回值是 py.path.local 类型的一个对象</li></ol></li><li>pytestconfig<ol><li>可以通过命令行参数、选项、配置文件、插件、运行目录等方式来控制pytest</li><li>待补充</li></ol></li><li>cache<ol><li>如果需要从上一段测试会话传递信息，可以使用cache，作用的存储一段测试会话信息</li><li><ul><li>-cache-show：查看cache目录</li></ul></li><li><ul><li>-cache-clear：清空缓存</li></ul></li><li>待补充</li></ol></li><li>capcys<ol><li>允许使用代码读取stdout和stderr</li><li>待补充</li></ol></li><li>mokeypatch<ol><li>允许运行期间对类或模块进行动态修改</li><li>待补充</li></ol></li><li>docktest_namespace<ol><li>标准库的一部分，可以在函数的文章字符串中放入示例代码</li><li>待补充</li></ol></li><li>recwarn<ol><li>检查待测代码产生的警告信息</li><li>待补充</li></ol></li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>002-命令行选项</title>
+      <link href="/2019/09/11/002-ming-ling-xing-xuan-xiang/"/>
+      <url>/2019/09/11/002-ming-ling-xing-xuan-xiang/</url>
+      
+        <content type="html"><![CDATA[<p>一、使用命令行选项执行测试</p><ol><li>–help：查看全部选项</li><li>–collect-only：展示给定的配置下，哪些测试用例会被运行</li><li>-k：允许使用表达式指定希望运行的测试用例，<ol><li>可以用表达式运行复杂场景<ol><li>-k “A and B”：</li><li>-k “A or B”：</li><li>-k “not A”：</li><li>-k “A and not B”：</li></ol></li></ol></li><li>-m marker_name：标记测试并分组，以便快速选中并运行<ol><li>可以使用装饰器 @pytest.mark.标签名 来做标记</li><li>可以用表达式指定多个标记名<ol><li>同-k的用法</li></ol></li></ol></li><li>-x：失败就停止整个会话<ol><li>正常情况下一个用例失败了，会跑下一个用例</li><li>debug时候需要失败了就停止整个会话</li></ol></li><li>—maxfail=num：允许失败num次后停止整个会话</li><li>-s：允许测试运行时输出输出流信息</li><li>-l：测试失败时打印出局部变量名和它们的值</li><li>–lf：一个或多个测试失败时，定位到最后一个失败</li><li>–ff：与lf基本相同，不同处在于会运行完剩余的测试用例</li><li>-v：输出的信息更详细</li><li>-q：简化输出信息</li><li>–tb=sytle：决定捕捉到失败时输出信息的显示方式<ol><li>short：只输出assert的一行以及系统判定的内容</li><li>line：只使用一行显示所有的错误信息</li><li>no：屏蔽所有回溯信息</li><li>long：最详细</li><li>auto：默认值，仅打印第一个和最后一个失败的用例回溯信息</li><li>native：只输出python标准库的回溯信息</li></ol></li><li>–durations=N：可以加快测试节奏，统计测试过程中几个阶段是最慢的，耗时越长越靠前</li><li>—version：显示当前的pytest版本及安装目录</li><li>-h：帮助</li></ol><p>二、自定义hook函数</p><ol><li>conftest.py   </li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>001-pytest环境搭建</title>
+      <link href="/2019/09/11/001-pytest-huan-jing-da-jian/"/>
+      <url>/2019/09/11/001-pytest-huan-jing-da-jian/</url>
       
         <content type="html"><![CDATA[<p>一、前置要求</p><ol><li>python3.5+</li></ol><p>二、安装</p><ol><li>pip install -U pytest</li></ol><p>三、运行</p><ol><li>测试搜索(test discovery)：<ol><li>是python搜索测试文件和测试用例的过程，只要遵守pytest的命名规则，pytest就可以自动搜索所有待执行的测试用例</li><li>测试规则是可以自定义的</li></ol></li><li>命名规则<ol><li>测试文件应当命名为：test_<something>.py or <something>_test.py</something></something></li><li>测试函数应当命名为：test_<something></something></li><li>测试类应该命名为：Test<something></something></li></ol></li><li>测试结果类型<ol><li>PASSED(.)：测试通过</li><li>FAILED(F)：测试失败</li><li>SKIPPED(s)：测试未被执行<ol><li>指定测试跳过执行，可以将测试标记为 @pytest.mark.skip()</li><li>或者使用 @pytest.mark.skipif() 指定跳过测试的条件</li></ol></li><li>xfail(x)：预期测试失败，实际测试失败<ol><li>使用 @pytest.mark.xfail()指定你预期会失败的用例</li></ol></li><li>XPASS(X)：预期测试失败，但实际运行通过，不符合预期</li><li>ERROR(E)：测试用例之外的代码触发异常</li></ol></li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>005-插件</title>
+      <link href="/2019/09/11/005-cha-jian/"/>
+      <url>/2019/09/11/005-cha-jian/</url>
+      
+        <content type="html"><![CDATA[<p>一、寻找插件</p><ol><li><a href="https://docs.pytest.org/en/latest/plugins.html" target="_blank" rel="noopener">https://docs.pytest.org/en/latest/plugins.html</a></li><li><a href="https://pypi.python.org" target="_blank" rel="noopener">https://pypi.python.org</a></li><li><a href="https://github.com/pytest-dev" target="_blank" rel="noopener">https://github.com/pytest-dev</a></li></ol><p>二、安装插件</p><ol><li>从pypi安装<ol><li>pypi是pip的默认仓库，安装最简单</li><li>安装：pip install 插件名</li></ol></li><li>从.tar.gz或.whl安装<ol><li>直接使用pip即可安装</li><li>pip install 插件包名</li></ol></li><li>从本地目录安装<ol><li>pip install —no-index —find-links=./some_plugins/ 插件名</li><li>—no-index：告诉pip不要连接到pypi</li><li>—find-links：告诉目录</li></ol></li><li>从git仓库安装<ol><li>pip install git@+htttps://github.com/…..</li></ol></li></ol><p>三、编写自己的插件</p><ol><li>待补充</li></ol><p>四、创建可安装插件</p><ol><li>待补充</li></ol><p>五、测试插件</p><ol><li>待补充</li></ol><p>六、创建发布包</p><ol><li>待补充</li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>006-配置</title>
+      <link href="/2019/09/11/006-pei-zhi/"/>
+      <url>/2019/09/11/006-pei-zhi/</url>
+      
+        <content type="html"><![CDATA[<p>一、pytest的配置文件</p><ol><li>pytest.ini：主配置文件，可以改变pytest的默认行为</li><li>conftest.py：本地插件库，其中的hook和fixture函数将作用于该文件所在的目录及其子目录</li><li><strong>init</strong>.py：每个测试子目录都包含该文件时，不同目录可以出现同名测试文件</li><li>tox.ini：tox工具的配置文件</li><li>setup.cfg：如果想发布一个python包，可影响setup.py的行为，头信息特殊，是[tool:pytest]</li><li>用pytest —help查看ini文件选项</li><li>插件可以添加ini文件选项</li></ol><p>二、更改默认命令行选项</p><ol><li>使用addopts设置</li></ol><p>三、注册标记来防范拼写错误</p><ol><li>查看标记：purest —markers</li><li>没有在pytest.ini文件中注册的标记，使用时会报错，默认是不会报错的</li></ol><p>四、指定pytest的最低版本号</p><ol><li>使用minversion选项</li></ol><p>五、指定pytest忽略某些目录</p><ol><li>使用norecurse</li></ol><p>六、指定测试目录</p><ol><li>使用testpaths</li></ol><p>七、更改测试搜索的规则</p><ol><li>使用python_classes</li><li>使用python_files</li></ol><p>八、禁用XPASS</p><ol><li>xfail_strict=true</li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>003-测试函数</title>
+      <link href="/2019/09/11/003-ce-shi-han-shu/"/>
+      <url>/2019/09/11/003-ce-shi-han-shu/</url>
+      
+        <content type="html"><![CDATA[<p>一、使用assert声明</p><ol><li>用pytest编写测试时，可以直接使用python关键字assert而不是使用测试框架的assert函数</li><li>pytest支持在assert后添加任何表达式，如果表达式的值通过bool转换后为False，则为失败</li><li>pytest有个重要的功能是重写assert关键字，会截断对原生assert的调用，替换为pytest定义的</li><li>每一个失败的用例在行首都用一个&gt;号来标识</li><li>以E开头的行是pytest提供的额外判定信息</li></ol><p>二、跳过测试</p><ol><li>@pytest.mark.skip(reason=’xxx’)：跳过测试</li><li>@pytest.mark.skipif(表达式, reason=’xxx’)：有条件的跳过测试</li><li>@pytest.mark.xfail：预期失败的用例<ol><li>预期失败，实际也失败的，结果是XFAIL</li><li>预期失败，实际成功的，结果是XPASS</li><li>XPASS这种结果可以在配置文件中配置为FAIL<ol><li>pytest.ini中配置<ol><li>xfail_strict=true</li></ol></li></ol></li></ol></li></ol><p>三、运行测试子集</p><ol><li>单个目录：以目录作为pytest参数</li><li>单个测试文件/模块：路径名加文件名</li><li>单个测试函数：文件名::函数名</li><li>单个测试类：文件名::类名</li><li>测试类中的测试方法：文件名::方法名</li></ol><p>四、参数化测试</p><ol><li>批量传送参数：@pytest.mark.parametrize(argnames,argvalues,ids)<ol><li>argnames：参数列表</li><li>argvalues：参数值列表</li><li>ids：为了改善可读性引入的参数</li><li>还可以在参数值旁边定义一个id来做标识</li></ol></li><li>可以为一组参数单独做标记<ol><li>@pytest.mark.parametrize(‘name, age’, [(‘wanghao’, 28), pytest.param(‘liyongle’, 37, marks=pytest.mark.xfail)])</li></ol></li><li>可以多维组合参数<ol><li>@pytest.mark.parametrize(“x”,[0, 1])</li><li>@pytest.mark.parametrize(“y”,[2, 3])</li><li>跑的时候，x=0/y=2, x=1/y=2, x=0/y=3,  x=1/y=3</li></ol></li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
       
       

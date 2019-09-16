@@ -4,19 +4,15 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="pytest环境搭建, 极客，彼岸，技术，测试，分享，生活">
-    <meta name="description" content="一、前置要求
+    <meta name="keywords" content="002-命令行选项, 极客，彼岸，技术，测试，分享，生活">
+    <meta name="description" content="一、使用命令行选项执行测试
 
-python3.5+
-
-二、安装
-
-pip install -U pytest
-
-三、运行
-
-测试搜索(test discovery)：
-是python搜索测试文件和测试用例的过程，只要遵守pytest的命名规则，pytes">
+–help：查看全部选项
+–collect-only：展示给定的配置下，哪些测试用例会被运行
+-k：允许使用表达式指定希望运行的测试用例，
+可以用表达式运行复杂场景
+-k “A and B”：
+-k “A or">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -24,7 +20,7 @@ pip install -U pytest
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>pytest环境搭建 | 极客彼岸</title>
+    <title>002-命令行选项 | 极客彼岸</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -271,13 +267,13 @@ pip install -U pytest
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        pytest环境搭建
+                        002-命令行选项
                     </div>
                 </div>
             </div>
@@ -415,43 +411,56 @@ pip install -U pytest
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>一、前置要求</p>
+                <p>一、使用命令行选项执行测试</p>
 <ol>
-<li>python3.5+</li>
+<li>–help：查看全部选项</li>
+<li>–collect-only：展示给定的配置下，哪些测试用例会被运行</li>
+<li>-k：允许使用表达式指定希望运行的测试用例，<ol>
+<li>可以用表达式运行复杂场景<ol>
+<li>-k “A and B”：</li>
+<li>-k “A or B”：</li>
+<li>-k “not A”：</li>
+<li>-k “A and not B”：</li>
 </ol>
-<p>二、安装</p>
+</li>
+</ol>
+</li>
+<li>-m marker_name：标记测试并分组，以便快速选中并运行<ol>
+<li>可以使用装饰器 @pytest.mark.标签名 来做标记</li>
+<li>可以用表达式指定多个标记名<ol>
+<li>同-k的用法</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>-x：失败就停止整个会话<ol>
+<li>正常情况下一个用例失败了，会跑下一个用例</li>
+<li>debug时候需要失败了就停止整个会话</li>
+</ol>
+</li>
+<li>—maxfail=num：允许失败num次后停止整个会话</li>
+<li>-s：允许测试运行时输出输出流信息</li>
+<li>-l：测试失败时打印出局部变量名和它们的值</li>
+<li>–lf：一个或多个测试失败时，定位到最后一个失败</li>
+<li>–ff：与lf基本相同，不同处在于会运行完剩余的测试用例</li>
+<li>-v：输出的信息更详细</li>
+<li>-q：简化输出信息</li>
+<li>–tb=sytle：决定捕捉到失败时输出信息的显示方式<ol>
+<li>short：只输出assert的一行以及系统判定的内容</li>
+<li>line：只使用一行显示所有的错误信息</li>
+<li>no：屏蔽所有回溯信息</li>
+<li>long：最详细</li>
+<li>auto：默认值，仅打印第一个和最后一个失败的用例回溯信息</li>
+<li>native：只输出python标准库的回溯信息</li>
+</ol>
+</li>
+<li>–durations=N：可以加快测试节奏，统计测试过程中几个阶段是最慢的，耗时越长越靠前</li>
+<li>—version：显示当前的pytest版本及安装目录</li>
+<li>-h：帮助</li>
+</ol>
+<p>二、自定义hook函数</p>
 <ol>
-<li>pip install -U pytest</li>
-</ol>
-<p>三、运行</p>
-<ol>
-<li>测试搜索(test discovery)：<ol>
-<li>是python搜索测试文件和测试用例的过程，只要遵守pytest的命名规则，pytest就可以自动搜索所有待执行的测试用例</li>
-<li>测试规则是可以自定义的</li>
-</ol>
-</li>
-<li>命名规则<ol>
-<li>测试文件应当命名为：test_<something>.py or <something>_test.py</something></something></li>
-<li>测试函数应当命名为：test_<something></something></li>
-<li>测试类应该命名为：Test<something></something></li>
-</ol>
-</li>
-<li>测试结果类型<ol>
-<li>PASSED(.)：测试通过</li>
-<li>FAILED(F)：测试失败</li>
-<li>SKIPPED(s)：测试未被执行<ol>
-<li>指定测试跳过执行，可以将测试标记为 @pytest.mark.skip()</li>
-<li>或者使用 @pytest.mark.skipif() 指定跳过测试的条件</li>
-</ol>
-</li>
-<li>xfail(x)：预期测试失败，实际测试失败<ol>
-<li>使用 @pytest.mark.xfail()指定你预期会失败的用例</li>
-</ol>
-</li>
-<li>XPASS(X)：预期测试失败，但实际运行通过，不符合预期</li>
-<li>ERROR(E)：测试用例之外的代码触发异常</li>
-</ol>
-</li>
+<li>conftest.py   </li>
 </ol>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -629,9 +638,9 @@ pip install -U pytest
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《pytest环境搭建》
+                    《002-命令行选项》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/11/pytest-huan-jing-da-jian/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/11/002-ming-ling-xing-xuan-xiang/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Wayne Wang
             </a> 采用
@@ -671,41 +680,40 @@ pip install -U pytest
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/11/pytest-huan-jing-da-jian/">
+                <a href="/2019/09/11/004-fixture/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="pytest环境搭建">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="004-fixture">
                         
-                        <span class="card-title">pytest环境搭建</span>
+                        <span class="card-title">004-fixture</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、前置要求
+                            一、fixture：在测试函数运行前后，由pytest执行的外壳函数
 
-python3.5+
+代码可以定制
+满足多变的测试需求
+传递数据
+setup 和 teardown
 
-二、安装
 
-pip install -U pytest
 
-三、运行
+二、使用
 
-测试搜索(test discovery)：
-是python搜索测试文件和测试用例的过程，只要遵守pytest的命名规则，pytes
+使用装饰器 @pytest.fixture() 声明函数是一个fixtu
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-11
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -714,7 +722,6 @@ pip install -U pytest
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -722,16 +729,16 @@ pip install -U pytest
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/11/pytest-huan-jing-da-jian/">
+                <a href="/2019/09/11/001-pytest-huan-jing-da-jian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="pytest环境搭建">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="001-pytest环境搭建">
                         
-                        <span class="card-title">pytest环境搭建</span>
+                        <span class="card-title">001-pytest环境搭建</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -763,7 +770,6 @@ pip install -U pytest
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -955,6 +961,8 @@ $(function () {
 <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
+
+    <script src="/libs/others/clicklove.js"></script>
 
 
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
